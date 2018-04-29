@@ -5,6 +5,20 @@ abstract class Polygon(edges: List[Int]) {
   val area: Double // 面積
 }
 
+object Polygon {
+  // 与えられる`edges` の辺に応じて
+  // 適切な多角形を生成する静的なリファクタリングメソッド
+  def fromEdges(edges: List[Int]): Polygon =
+    edges.length match {
+      case 3 =>
+        new Triangle(edges)
+      case 4 =>
+        new Square(edges)
+      case x =>
+        ??? // 該当なし
+    }
+}
+
 class Triangle(edges: List[Int]) extends Polygon(edges) {
   // 与えられた辺から三角形が成立すると勝手に仮定
   val a = edges(0)
@@ -28,16 +42,22 @@ class Square(edges: List[Int]) extends Polygon(edges) {
   val area = {
     // Brahmagupta's formula
     // 対角の和が180度と勝手に仮定
-    val s = (a + b + c) / 2.0
-    math.sqrt(s * (s - a) * (s - b) * (s - c) * (s - d))
+    val s = (a + b + c + d) / 2.0
+    math.sqrt((s - a) * (s - b) * (s - c) * (s - d))
   }
 }
 
 object GuardianOfThePolygon {
   def main(args: Array[String]): Unit = {
-    val edges = List(3, 4, 5)
-    val triangle = new Triangle(edges)
-    println(triangle.area)
+    val edges3 = List(3, 4, 5)
+    val edges4 = List(3, 13, 13, 14)
+    val polygon3 = Polygon.fromEdges(edges3)
+    val polygon4 = Polygon.fromEdges(edges4)
+    println(s"辺の数: ${polygon3.n}, 面積: ${polygon3.area}")
+    println(s"辺の数: ${polygon4.n}, 面積: ${polygon4.area}")
+
+    val edges5 = List(3, 3, 3, 3, 3)
+//    val polygon5 = Polygon.fromEdges(edges5) // Error
   }
 }
 
