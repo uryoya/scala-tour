@@ -1,4 +1,4 @@
-// 5章　再会のFizzBuzz
+// 6章　再会のFizzBuzz
 package example
 
 object Hello {

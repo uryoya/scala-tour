@@ -1,3 +1,4 @@
+// 5章　多角形の守り人
 package example
 
 abstract class Polygon(edges: List[Int]) {
