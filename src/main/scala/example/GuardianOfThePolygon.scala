@@ -19,6 +19,37 @@ object Polygon {
     }
 }
 
+trait Color {
+  val R: Int
+  val G: Int
+  val B: Int
+}
+
+trait Red extends Color {
+  override val R: Int = 255
+  override val G: Int = 0
+  override val B: Int = 0
+}
+
+trait Green extends Color {
+  override val R: Int = 0
+  override val G: Int = 255
+  override val B: Int = 0
+}
+
+class ColoredTriangle(edges: List[Int])
+  extends Polygon(edges) with Red with Green {
+  val a = edges(0)
+  val b = edges(1)
+  val c = edges(2)
+
+  val area = {
+    // Heron's formula
+    val s = (a + b + c) / 2.0
+    math.sqrt(s * (s - a) * (s - b) * (s - c))
+  }
+}
+
 class Triangle(edges: List[Int]) extends Polygon(edges) {
   // 与えられた辺から三角形が成立すると勝手に仮定
   val a = edges(0)
@@ -57,7 +88,17 @@ object GuardianOfThePolygon {
     println(s"辺の数: ${polygon4.n}, 面積: ${polygon4.area}")
 
     val edges5 = List(3, 3, 3, 3, 3)
-//    val polygon5 = Polygon.fromEdges(edges5) // Error
+    //    val polygon5 = Polygon.fromEdges(edges5) // Error
+
+    println()
+    println("<<< ColoredTriangle >>>")
+    // `Red` と `Green` が菱形継承問題を起こしている
+    // 後勝ちなので `Green` による値が利用される
+    val edges = List(3, 4, 5)
+    val greenTriangle = new ColoredTriangle(edges)
+    println(greenTriangle.R)
+    println(greenTriangle.G)
+    println(greenTriangle.B)
   }
 }
 
