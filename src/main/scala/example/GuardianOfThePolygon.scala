@@ -8,7 +8,7 @@ abstract class Polygon(edges: List[Int]) {
 
 object Polygon {
   // 与えられる`edges` の辺に応じて
-  // 適切な多角形を生成する静的なリファクタリングメソッド
+  // 適切な多角形を生成する静的なファクトリメソッド
   def fromEdges(edges: List[Int]): Polygon =
     edges.length match {
       case 3 =>
