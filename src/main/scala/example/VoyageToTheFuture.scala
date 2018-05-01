@@ -2,6 +2,7 @@ package example
 
 import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.util.{Failure, Success}
 
 object VoyageToTheFuture extends App {
   val f1: Future[Int] = Future {
@@ -13,14 +14,13 @@ object VoyageToTheFuture extends App {
   val f2: Future[Int] = Future {
     Thread.sleep(1000) // 軽い処理
     println("タスク２終了")
-    2 // 軽い処理の結果
+    2 / 0 // ゼロ除算で例外！
   }
 
-  for {
-    res1 <- f1
-    res2 <- f2
-  } {
-    println(res1 + res2)
+  val f: Future[(Int, Int)] = f1.zip(f2)
+  f.onComplete {
+    case Success(res) => println(res._1 + res._2)
+    case Failure(ex) => println(ex.getMessage)
   }
 
   println("コード的には一番下だよ")
