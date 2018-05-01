@@ -8,3 +8,4 @@
 - [5章　多角形の守り人](/src/main/scala/example/GuardianOfThePolygon.scala)
 - [6章　再会のFizzBuzz](/src/main/scala/example/ReFizzBuzz.scala)
 - [7章　ぬるぽなんて、あたしが許さない](/src/main/scala/example/UnforgivenNullPointerException.scala)
+- [8章　ミライへ旅立とう](/src/main/scala/example/VoyageToTheFuture.scala)
