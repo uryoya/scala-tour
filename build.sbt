@@ -8,5 +8,9 @@ lazy val root = (project in file(".")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "scala-tour",
-    libraryDependencies += scalaTest % Test
+    libraryDependencies ++= Seq(
+      "org.json4s" %%  "json4s-jackson" % "3.5.3",
+      "org.scala-sbt" %% "io" % "1.1.0",
+      scalaTest % Test,
+    )
   )
